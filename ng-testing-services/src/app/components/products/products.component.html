@@ -1,0 +1,10 @@
+<section class="container">
+  <p>products works!</p>
+
+  <div class="my-grid">
+    <figure *ngFor="let product of products">
+      <img [src]="product.images[0]" alt="image" loading="lazy">
+      <figcaption>{{ product.title }} - {{ product.price }} </figcaption>
+    </figure>
+  </div>
+</section>
