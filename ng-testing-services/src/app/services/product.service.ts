@@ -55,20 +55,20 @@ export class ProductsService {
     );
   }
 
-  getOne(id: string) {
+  getOne(id: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/products/${id}`)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.Conflict) {
-          return throwError(() => new Error('Algo esta fallando en el server'));
+          return throwError(() => 'Algo esta fallando en el server');
         }
         if (error.status === HttpStatusCode.NotFound) {
-          return throwError(() => new Error('El producto no existe'));
+          return throwError(() => 'El producto no existe');
         }
         if (error.status === HttpStatusCode.Unauthorized) {
-          return throwError(() => new Error('No estas permitido'));
+          return throwError(() => 'No estas permitido');
         }
-        return throwError(() => new Error('Ups algo salio mal'));
+        return throwError(() => 'Ups algo salio mal');
       })
     )
   }
