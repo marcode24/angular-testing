@@ -13,4 +13,5 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Run Tests
-        run: ng test --no-watch --code-coverage --browsers=ChromeHeadlessCI
+        # run: npx ng test --no-watch --code-coverage --browsers=ChromeHeadlessCI
+        run: npm run test -- --no-watch --code-coverage --browsers=ChromeHeadlessCI
