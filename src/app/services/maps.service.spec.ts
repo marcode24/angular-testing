@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { MapsService } from './maps.service';
 
-fdescribe('MapsService', () => {
+describe('MapsService', () => {
   let mapService: MapsService;
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ fdescribe('MapsService', () => {
     expect(mapService).toBeTruthy();
   });
 
-  fdescribe('getCurrentPosition method', () => {
+  describe('getCurrentPosition method', () => {
     it('should save the center coordinates', () => {
       spyOn(navigator.geolocation, 'getCurrentPosition').and.callFake((successFn) => {
         const geolocationMock = {

@@ -5,7 +5,7 @@ import { TokenService } from './token.service';
 import { Auth } from '../models/auth.model';
 import { environment } from 'src/environments/environment';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
 
   let authService: AuthService;
   let httpController: HttpTestingController; // This is a mock of the HttpClient service

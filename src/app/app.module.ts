@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './components/products/products.component';
 import { PicoComponent } from './components/pico/pico.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { PersonComponent } from './components/person/person.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
-    PicoComponent
+    PicoComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,

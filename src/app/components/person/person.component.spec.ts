@@ -1,0 +1,65 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PersonComponent } from './person.component';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { Person } from 'src/app/models/person.model';
+
+fdescribe('PersonComponent', () => {
+  let component: PersonComponent;
+  let fixture: ComponentFixture<PersonComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ PersonComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PersonComponent);
+    component = fixture.componentInstance;
+    component.person = new Person('test','test',1,1,1);
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should the name be "test"', () => {
+    component.person = new Person('ejemplo', 'test', 1, 1, 1);
+    expect(component.person.name).toEqual('ejemplo');
+  });
+
+  it('should have <h3> with "Hola, {{ person.name }}"', () => {
+    component.person = new Person('Nombre', 'test', 1, 1, 1);
+    const expectMsg = `Hola, ${component.person.name}`;
+    const personDebug: DebugElement = fixture.debugElement;
+    const h3Debug: DebugElement = personDebug.query(By.css('h3'));
+    const personElement: HTMLElement = h3Debug.nativeElement;
+    fixture.detectChanges();
+    expect(personElement?.textContent).toEqual(expectMsg);
+  });
+
+  it('should have <p> with "Mi altura es, {{ person.height }}"', () => {
+    component.person = new Person('Nombre', 'test', 1, 1, 1);
+    const expectMsg = `Mi altura es, ${component.person.height}`;
+    const personDebug: DebugElement = fixture.debugElement;
+    const pDebug: DebugElement = personDebug.query(By.css('p'));
+    const personElement: HTMLElement = pDebug.nativeElement;
+    fixture.detectChanges();
+    expect(personElement?.textContent).toEqual(expectMsg);
+  });
+
+
+  // it('should have a <p> with "mi parrafo"', () => {
+  //   const personDebug: DebugElement = fixture.debugElement;
+  //   const pDebug: DebugElement = personDebug.query(By.css('p'));
+  //   const personElement: HTMLElement = pDebug.nativeElement;
+  //   // const personElement: HTMLElement = personDebug.nativeElement;
+  //   // const personElement: HTMLElement = fixture.nativeElement;
+  //   // const p = personElement.querySelector('p');
+  //   expect(personElement?.textContent).toEqual('mi parrafo');
+  // });
+});
