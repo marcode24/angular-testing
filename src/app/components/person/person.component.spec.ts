@@ -5,7 +5,7 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Person } from 'src/app/models/person.model';
 
-fdescribe('PersonComponent', () => {
+describe('PersonComponent', () => {
   let component: PersonComponent;
   let fixture: ComponentFixture<PersonComponent>;
 
@@ -81,5 +81,16 @@ fdescribe('PersonComponent', () => {
     buttonDebug.triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(buttonElement.textContent).toContain(expectMsg);
+  });
+
+  it('should raise selected event when clicked', () => {
+    const expectPerson = new Person('Nombre', 'test', 30, 120, 1.65);
+    component.person = expectPerson;
+    const buttonDebug = fixture.debugElement.query(By.css('button.btn-choose'));
+    let selectedPerson: Person | undefined;
+    component.onSelected.subscribe((person: Person) => selectedPerson = person);
+    buttonDebug.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(selectedPerson).toEqual(expectPerson);
   });
 });
