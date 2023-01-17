@@ -5,18 +5,23 @@ import { ProductComponent } from '../product/product.component';
 import { ProductsService } from 'src/app/services/product.service';
 import { mockProducts } from 'src/app/models/product.mock';
 import { defer, of } from 'rxjs';
+import { ValueService } from 'src/app/services/value.service';
+import { By } from '@angular/platform-browser';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
   let productService: jasmine.SpyObj<ProductsService>;
+  let valueService: jasmine.SpyObj<ValueService>;
 
   beforeEach(async () => {
     const spy = jasmine.createSpyObj('ProductsService', ['getAll']);
+    const spyValueService = jasmine.createSpyObj('ValueService', ['getPromiseValue']);
     await TestBed.configureTestingModule({
       declarations: [ ProductsComponent, ProductComponent ],
       providers: [
-        { provide: ProductsService, useValue: spy }
+        { provide: ProductsService, useValue: spy },
+        { provide: ValueService, useValue: spyValueService }
       ]
     })
     .compileComponents();
@@ -26,6 +31,7 @@ describe('ProductsComponent', () => {
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance;
     productService = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
+    valueService = TestBed.inject(ValueService) as jasmine.SpyObj<ValueService>;
     const productsMock = mockProducts(3);
     productService.getAll.and.returnValue(of(productsMock));
     fixture.detectChanges();
@@ -69,5 +75,27 @@ describe('ProductsComponent', () => {
     }));
   });
 
+  describe('test for callPromise', () => {
+    it('should call valueService.getPromiseValue', async () => {
+      const mockMessage = 'test';
+      valueService.getPromiseValue.and.returnValue(Promise.resolve('test'));
+      await component.callPromise();
+      fixture.detectChanges();
+      expect(valueService.getPromiseValue).toHaveBeenCalled();
+      expect(component.rta).toEqual(mockMessage);
+    });
 
+    it('should show "test" when button is clicked', fakeAsync (() => {
+      const mockMessage = 'test';
+      valueService.getPromiseValue.and.returnValue(Promise.resolve(mockMessage));
+      const buttonDebug = fixture.debugElement.query(By.css('.button-promise'));
+      buttonDebug.triggerEventHandler('click', null);
+      tick();
+      fixture.detectChanges();
+      const pDebug = fixture.debugElement.query(By.css('p.rta'));
+      expect(valueService.getPromiseValue).toHaveBeenCalled();
+      expect(component.rta).toEqual(mockMessage);
+      expect(pDebug.nativeElement.textContent).toEqual(mockMessage);
+    }));
+  });
 });
