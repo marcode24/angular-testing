@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
 import { PicoComponent } from './components/pico/pico.component';
 import { PeopleComponent } from './components/people/people.component';
+import { OthersComponent } from './components/others/others.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'products', component: ProductsComponent },
   { path: 'pico', component: PicoComponent },
   { path: 'people', component: PeopleComponent },
+  { path: 'others', component: OthersComponent }
 ];
 
 @NgModule({
