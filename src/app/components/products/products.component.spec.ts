@@ -6,7 +6,7 @@ import { ProductsService } from 'src/app/services/product.service';
 import { mockProducts } from 'src/app/models/product.mock';
 import { ValueService } from 'src/app/services/value.service';
 
-import { asyncData, asyncError, mockObservable, mockPromise, query, queryById } from 'src/testing';
+import { asyncData, asyncError, getText, mockObservable, mockPromise, query, queryById } from 'src/testing';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -95,10 +95,12 @@ describe('ProductsComponent', () => {
       tick();
       fixture.detectChanges();
       // const pDebug = fixture.debugElement.query(By.css('p.rta'));
-      const pDebug = query(fixture, 'p.rta');
+      // const pDebug = query(fixture, 'p.rta');
+      const textRta = getText(fixture, 'rta');
       expect(valueService.getPromiseValue).toHaveBeenCalled();
       expect(component.rta).toEqual(mockMessage);
-      expect(pDebug.nativeElement.textContent).toEqual(mockMessage);
+      expect(textRta).toEqual(mockMessage);
+      // expect(pDebug.nativeElement.textContent).toEqual(mockMessage);
     }));
   });
 });

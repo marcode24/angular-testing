@@ -4,6 +4,7 @@ import { PersonComponent } from './person.component';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Person } from 'src/app/models/person.model';
+import { clickEvent, queryById } from 'src/testing';
 
 describe('PersonComponent', () => {
   let component: PersonComponent;
@@ -76,9 +77,11 @@ describe('PersonComponent', () => {
   it('should display a text with IMC when click on button', () => {
     const expectMsg = `overweight level 3`;
     component.person = new Person('Nombre', 'test', 30, 120, 1.65); // overweight level 3
-    const buttonDebug = fixture.debugElement.query(By.css('button.btn-imc'));
+    // const buttonDebug = fixture.debugElement.query(By.css('button.btn-imc'));
+    const buttonDebug = queryById(fixture, 'btn-imc');
     const buttonElement = buttonDebug.nativeElement;
-    buttonDebug.triggerEventHandler('click', null);
+    // buttonDebug.triggerEventHandler('click', null);
+    clickEvent(fixture, 'btn-imc', true);
     fixture.detectChanges();
     expect(buttonElement.textContent).toContain(expectMsg);
   });
