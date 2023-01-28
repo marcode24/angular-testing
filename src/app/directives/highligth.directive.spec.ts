@@ -3,6 +3,7 @@ import { HighligthDirective } from './highligth.directive';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { queryAllByDirective } from 'src/testing';
 
 @Component({
   template: `
@@ -40,14 +41,16 @@ describe('HighligthDirective', () => {
   });
 
   it('should have three highlighted elements', () => {
-    const elements = fixture.debugElement.queryAll(By.directive(HighligthDirective));
+    // const elements = fixture.debugElement.queryAll(By.directive(HighligthDirective));
+    const elements = queryAllByDirective(fixture, HighligthDirective);
     const elementsWithoutDirective = fixture.debugElement.queryAll(By.css('*:not([highligth])'));
     expect(elements.length).toBe(4);
     expect(elementsWithoutDirective.length).toBe(2);
   });
 
   it('should the elements be matched with the directive', () => {
-    const elements = fixture.debugElement.queryAll(By.directive(HighligthDirective));
+    // const elements = fixture.debugElement.queryAll(By.directive(HighligthDirective));
+    const elements = queryAllByDirective(fixture, HighligthDirective);
     expect(elements[0].nativeElement.style.backgroundColor).toEqual('gray');
     expect(elements[1].nativeElement.style.backgroundColor).toEqual('yellow');
     expect(elements[2].nativeElement.style.backgroundColor).toEqual('pink');
