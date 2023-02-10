@@ -14,6 +14,7 @@ import { ProductComponent } from './components/product/product.component';
 import { OthersComponent } from './components/others/others.component';
 import { HighligthDirective } from './directives/highligth.directive';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthModule
   ],
   providers: [
     {
