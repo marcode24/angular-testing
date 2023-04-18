@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MyValidators } from './../../../utils/validators';
 
 import { UsersService } from './../../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -28,7 +29,8 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -42,6 +44,7 @@ export class RegisterFormComponent implements OnInit {
       .subscribe({
         next: () => {
           this.status = 'success';
+          this.router.navigateByUrl('/login');
           // this.form.reset();
         },
         error: () => {

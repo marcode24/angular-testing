@@ -19,7 +19,7 @@ describe('PersonComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonComponent);
-    component = fixture.componentInstance;
+      component = fixture.componentInstance;
     component.person = new Person('test','test',1,1,1);
     fixture.detectChanges();
   });
