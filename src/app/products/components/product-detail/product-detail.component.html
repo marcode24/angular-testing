@@ -1,0 +1,15 @@
+<section class="container">
+  <article>
+    <a (click)="goToBack()">Back</a>
+    <h2>Type: {{ typeCustomer }}</h2>
+    <div class="detail" *ngIf="product">
+      <figure>
+        <img data-testid="img" [src]="product.images[0]" alt="">
+      </figure>
+      <div>
+        <h1 data-testid="title">{{ product.title }}</h1>
+        <h2 data-testid="price">{{ product.price | currency }}</h2>
+      </div>
+    </div>
+  </article>
+</section>

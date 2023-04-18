@@ -9,12 +9,15 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'products', component: ProductsComponent },
   { path: 'pico', component: PicoComponent },
-  { path: 'people', component: PeopleComponent },
   { path: 'others', component: OthersComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  }
 ];
 
 @NgModule({
