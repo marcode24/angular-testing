@@ -37,7 +37,9 @@ describe('ProductDetailComponent', () => {
     route = TestBed.inject(ActivatedRoute) as unknown as ActivatedRouteStub;
     productService = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
     location = TestBed.inject(Location) as jasmine.SpyObj<Location>;
+  });
 
+  it('should create', () => {
     const productId = '1';
     route.setParamMap({ id: productId });
 
@@ -48,9 +50,6 @@ describe('ProductDetailComponent', () => {
     productService.getOne.and.returnValue(mockObservable(productMock));
 
     fixture.detectChanges(); // here's called ngOnInit
-  });
-
-  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
